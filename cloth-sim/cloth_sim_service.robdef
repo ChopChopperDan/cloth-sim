@@ -1,0 +1,30 @@
+service edu.rpi.cats.utilities.clothsim
+
+option version 0.5
+
+struct Velocity
+    field double vx
+    field double vy
+    field double vz
+end struct
+
+struct ClothState
+    field double t
+    field uint16 numX
+    field uint16 numY
+    field uint32 n_points
+    field double[] x
+    field double[] y
+    field double[] z
+    field double[] fx
+    field double[] fy
+    field double[] fz
+    
+end struct
+
+object ClothSimulator
+    
+    function ClothState getClothState()
+    function void setGraspVelocities(Velocity v00, Velocity v10, Velocity v01, Velocity v11)
+    
+end object
