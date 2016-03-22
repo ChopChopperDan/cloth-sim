@@ -15,17 +15,16 @@ namespace utilities
 namespace clothsim
 {
 
-class Velocity;
+class Pose;
 class ClothState;
 class ClothSimulator;
 
-class Velocity : public RobotRaconteur::RRStructure {
+class Pose : public RobotRaconteur::RRStructure {
 public:
-double vx;
-double vy;
-double vz;
+RR_SHARED_PTR<RobotRaconteur::RRArray<double > > R;
+RR_SHARED_PTR<RobotRaconteur::RRArray<double > > p;
 
-virtual std::string RRType() {return "edu.rpi.cats.utilities.clothsim.Velocity";  }
+virtual std::string RRType() {return "edu.rpi.cats.utilities.clothsim.Pose";  }
 };
 
 class ClothState : public RobotRaconteur::RRStructure {
@@ -47,9 +46,23 @@ virtual std::string RRType() {return "edu.rpi.cats.utilities.clothsim.ClothState
 class ClothSimulator : public virtual RobotRaconteur::RRObject
 {
 public:
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > get_grasped_nodes00()=0;
+virtual void set_grasped_nodes00(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value)=0;
+
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > get_grasped_nodes10()=0;
+virtual void set_grasped_nodes10(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value)=0;
+
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > get_grasped_nodes01()=0;
+virtual void set_grasped_nodes01(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value)=0;
+
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > get_grasped_nodes11()=0;
+virtual void set_grasped_nodes11(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value)=0;
+
 virtual RR_SHARED_PTR<ClothState > getClothState()=0;
 
-virtual void setGraspVelocities(RR_SHARED_PTR<Velocity > v00, RR_SHARED_PTR<Velocity > v10, RR_SHARED_PTR<Velocity > v01, RR_SHARED_PTR<Velocity > v11)=0;
+virtual void setGraspPoses(RR_SHARED_PTR<Pose > p00, RR_SHARED_PTR<Pose > p10, RR_SHARED_PTR<Pose > p01, RR_SHARED_PTR<Pose > p11)=0;
+
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > getFaceStructure()=0;
 
 virtual std::string RRType() {return "edu.rpi.cats.utilities.clothsim.ClothSimulator";  }
 };

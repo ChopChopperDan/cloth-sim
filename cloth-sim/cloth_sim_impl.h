@@ -25,6 +25,13 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <map>
 
+struct node_relationship
+{
+	int index;
+	btVector3 vec;
+	btVector3 x_des;
+};
+
 class ClothSimImpl : public edu::rpi::cats::utilities::clothsim::ClothSimulator, public boost::enable_shared_from_this < ClothSimImpl >
 {
 public:
@@ -35,14 +42,28 @@ public:
 	ClothSimImpl(uint16_t nX, uint16_t nY, btScalar width, btScalar length, btScalar mass, btScalar stiffness, btScalar bending_stiffness, btScalar damping);
 	void shutdown();
 
+	virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > get_grasped_nodes00();
+	virtual void set_grasped_nodes00(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value);
+
+	virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > get_grasped_nodes10();
+	virtual void set_grasped_nodes10(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value);
+
+	virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > get_grasped_nodes01();
+	virtual void set_grasped_nodes01(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value);
+
+	virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > get_grasped_nodes11();
+	virtual void set_grasped_nodes11(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value);
+
 	int initWorldAndCloth();
 
 	virtual RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::ClothState > getClothState();
 
-	virtual void setGraspVelocities(RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::Velocity > v00, 
-									RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::Velocity > v10,
-									RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::Velocity > v01,
-									RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::Velocity > v11);
+	virtual void setGraspPoses(RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::Pose > p00,
+									RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::Pose > p10,
+									RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::Pose > p01,
+									RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::Pose > p11);
+
+	virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > getFaceStructure();
 
 private:
 	double *x, *y, *z;
@@ -52,10 +73,13 @@ private:
 	btScalar cloth_width, cloth_length, cloth_mass, cloth_stiffness, cloth_bending_stiffness, cloth_damping;
 	double t;
 	float dt;
-	btVector3 v00, v10, v01, v11;
+	bool new_grasp_positions, grasp_positions_updated;
+	std::vector<node_relationship> grasp00_nodes, grasp10_nodes, grasp01_nodes, grasp11_nodes;
+	
 
 	boost::mutex mtx_;
-	boost::thread t1;
+	boost::thread th1;
+
 
 	btBroadphaseInterface *broadphase;
 	btCollisionConfiguration *collisionConfiguration;
@@ -66,4 +90,8 @@ private:
 	btSoftBody *cloth;
 
 	void stepThroughSimulation();
+	void setNewGraspPositions(RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::Pose > p, std::vector<node_relationship> &grasp_nodes);
+	void updateGraspPoints(std::vector<node_relationship> grasp_nodes, btScalar time_step);
+	void resetGraspVelocities(std::vector<node_relationship> grasp_nodes);
+	void solveSpringForces(btScalar structural_stiffness, btScalar bending_stiffness);
 };

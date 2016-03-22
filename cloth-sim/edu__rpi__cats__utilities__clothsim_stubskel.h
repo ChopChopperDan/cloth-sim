@@ -28,10 +28,10 @@ virtual void DownCastAndThrowException(RobotRaconteur::RobotRaconteurException& 
 virtual RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> DownCastException(RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> exp);
 };
 
-class Velocity_stub : public virtual RobotRaconteur::StructureStub
+class Pose_stub : public virtual RobotRaconteur::StructureStub
 {
 public:
-Velocity_stub(RR_SHARED_PTR<RobotRaconteur::RobotRaconteurNode> node) : RobotRaconteur::StructureStub(node) {}
+Pose_stub(RR_SHARED_PTR<RobotRaconteur::RobotRaconteurNode> node) : RobotRaconteur::StructureStub(node) {}
 virtual RR_SHARED_PTR<RobotRaconteur::MessageElementStructure> PackStructure(RR_SHARED_PTR<RobotRaconteur::RRObject> s);
 virtual RR_SHARED_PTR<RobotRaconteur::RRStructure> UnpackStructure(RR_SHARED_PTR<RobotRaconteur::MessageElementStructure> m);
 };
@@ -47,6 +47,62 @@ virtual RR_SHARED_PTR<RobotRaconteur::RRStructure> UnpackStructure(RR_SHARED_PTR
 class async_ClothSimulator
 {
 public:
+virtual void async_get_grasped_nodes00(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
+virtual void async_set_grasped_nodes00(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
+
+#ifdef ROBOTRACONTEUR_USE_ASIO_SPAWN
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > async_get_grasped_nodes00(boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
+{
+    return RobotRaconteur::detail::async_wrap_for_spawn<RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > >(boost::bind((void (async_ClothSimulator::*)(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) >, int32_t))&async_ClothSimulator::async_get_grasped_nodes00, this, _1, rr_timeout), rr_yield);
+}
+virtual void async_set_grasped_nodes00(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value, boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
+{
+    RobotRaconteur::detail::async_wrap_for_spawn_void(boost::bind((void (async_ClothSimulator::*)(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >, boost::function<void(RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>)>, int32_t))&async_ClothSimulator::async_set_grasped_nodes00, this, boost::ref(value), _1, rr_timeout), rr_yield);
+}
+#endif
+
+virtual void async_get_grasped_nodes10(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
+virtual void async_set_grasped_nodes10(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
+
+#ifdef ROBOTRACONTEUR_USE_ASIO_SPAWN
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > async_get_grasped_nodes10(boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
+{
+    return RobotRaconteur::detail::async_wrap_for_spawn<RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > >(boost::bind((void (async_ClothSimulator::*)(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) >, int32_t))&async_ClothSimulator::async_get_grasped_nodes10, this, _1, rr_timeout), rr_yield);
+}
+virtual void async_set_grasped_nodes10(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value, boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
+{
+    RobotRaconteur::detail::async_wrap_for_spawn_void(boost::bind((void (async_ClothSimulator::*)(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >, boost::function<void(RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>)>, int32_t))&async_ClothSimulator::async_set_grasped_nodes10, this, boost::ref(value), _1, rr_timeout), rr_yield);
+}
+#endif
+
+virtual void async_get_grasped_nodes01(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
+virtual void async_set_grasped_nodes01(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
+
+#ifdef ROBOTRACONTEUR_USE_ASIO_SPAWN
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > async_get_grasped_nodes01(boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
+{
+    return RobotRaconteur::detail::async_wrap_for_spawn<RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > >(boost::bind((void (async_ClothSimulator::*)(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) >, int32_t))&async_ClothSimulator::async_get_grasped_nodes01, this, _1, rr_timeout), rr_yield);
+}
+virtual void async_set_grasped_nodes01(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value, boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
+{
+    RobotRaconteur::detail::async_wrap_for_spawn_void(boost::bind((void (async_ClothSimulator::*)(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >, boost::function<void(RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>)>, int32_t))&async_ClothSimulator::async_set_grasped_nodes01, this, boost::ref(value), _1, rr_timeout), rr_yield);
+}
+#endif
+
+virtual void async_get_grasped_nodes11(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
+virtual void async_set_grasped_nodes11(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
+
+#ifdef ROBOTRACONTEUR_USE_ASIO_SPAWN
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > async_get_grasped_nodes11(boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
+{
+    return RobotRaconteur::detail::async_wrap_for_spawn<RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > >(boost::bind((void (async_ClothSimulator::*)(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) >, int32_t))&async_ClothSimulator::async_get_grasped_nodes11, this, _1, rr_timeout), rr_yield);
+}
+virtual void async_set_grasped_nodes11(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value, boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
+{
+    RobotRaconteur::detail::async_wrap_for_spawn_void(boost::bind((void (async_ClothSimulator::*)(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >, boost::function<void(RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>)>, int32_t))&async_ClothSimulator::async_set_grasped_nodes11, this, boost::ref(value), _1, rr_timeout), rr_yield);
+}
+#endif
+
 virtual void async_getClothState(boost::function<void (RR_SHARED_PTR<ClothState >, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
 
 #ifdef ROBOTRACONTEUR_USE_ASIO_SPAWN
@@ -56,12 +112,21 @@ RR_SHARED_PTR<ClothState > async_getClothState(boost::asio::yield_context rr_yie
 }
 #endif
 
-virtual void async_setGraspVelocities(RR_SHARED_PTR<Velocity > v00, RR_SHARED_PTR<Velocity > v10, RR_SHARED_PTR<Velocity > v01, RR_SHARED_PTR<Velocity > v11,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
+virtual void async_setGraspPoses(RR_SHARED_PTR<Pose > p00, RR_SHARED_PTR<Pose > p10, RR_SHARED_PTR<Pose > p01, RR_SHARED_PTR<Pose > p11,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
 
 #ifdef ROBOTRACONTEUR_USE_ASIO_SPAWN
-virtual void async_setGraspVelocities(RR_SHARED_PTR<Velocity > v00, RR_SHARED_PTR<Velocity > v10, RR_SHARED_PTR<Velocity > v01, RR_SHARED_PTR<Velocity > v11,boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
+virtual void async_setGraspPoses(RR_SHARED_PTR<Pose > p00, RR_SHARED_PTR<Pose > p10, RR_SHARED_PTR<Pose > p01, RR_SHARED_PTR<Pose > p11,boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
 {
-    RobotRaconteur::detail::async_wrap_for_spawn_void(boost::bind((void (async_ClothSimulator::*)(RR_SHARED_PTR<Velocity >,RR_SHARED_PTR<Velocity >,RR_SHARED_PTR<Velocity >,RR_SHARED_PTR<Velocity >,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>)>,int32_t))&async_ClothSimulator::async_setGraspVelocities, this, boost::ref(v00),boost::ref(v10),boost::ref(v01),boost::ref(v11),_1,rr_timeout), rr_yield);
+    RobotRaconteur::detail::async_wrap_for_spawn_void(boost::bind((void (async_ClothSimulator::*)(RR_SHARED_PTR<Pose >,RR_SHARED_PTR<Pose >,RR_SHARED_PTR<Pose >,RR_SHARED_PTR<Pose >,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>)>,int32_t))&async_ClothSimulator::async_setGraspPoses, this, boost::ref(p00),boost::ref(p10),boost::ref(p01),boost::ref(p11),_1,rr_timeout), rr_yield);
+}
+#endif
+
+virtual void async_getFaceStructure(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
+
+#ifdef ROBOTRACONTEUR_USE_ASIO_SPAWN
+RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > async_getFaceStructure(boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
+{
+    return RobotRaconteur::detail::async_wrap_for_spawn<RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >>(boost::bind((void (async_ClothSimulator::*)(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>)>,int32_t))&async_ClothSimulator::async_getFaceStructure, this, _1,rr_timeout), rr_yield);
 }
 #endif
 
@@ -72,9 +137,23 @@ public:
 ClothSimulator_stub(const std::string& path, RR_SHARED_PTR<RobotRaconteur::ClientContext> c);
 
 virtual void RRInitStub();
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > get_grasped_nodes00();
+virtual void set_grasped_nodes00(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value);
+
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > get_grasped_nodes10();
+virtual void set_grasped_nodes10(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value);
+
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > get_grasped_nodes01();
+virtual void set_grasped_nodes01(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value);
+
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > get_grasped_nodes11();
+virtual void set_grasped_nodes11(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value);
+
 virtual RR_SHARED_PTR<ClothState > getClothState();
 
-virtual void setGraspVelocities(RR_SHARED_PTR<Velocity > v00, RR_SHARED_PTR<Velocity > v10, RR_SHARED_PTR<Velocity > v01, RR_SHARED_PTR<Velocity > v11);
+virtual void setGraspPoses(RR_SHARED_PTR<Pose > p00, RR_SHARED_PTR<Pose > p10, RR_SHARED_PTR<Pose > p01, RR_SHARED_PTR<Pose > p11);
+
+virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > getFaceStructure();
 
 
 virtual void DispatchEvent(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m);
@@ -83,15 +162,48 @@ virtual void DispatchWireMessage(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m);
 virtual RR_SHARED_PTR<RobotRaconteur::MessageEntry> CallbackCall(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m);
 virtual void RRClose();
 private:
+virtual void async_get_grasped_nodes00(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
+virtual void async_set_grasped_nodes00(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
+
+protected:
+virtual void rrend_get_grasped_nodes00(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > ,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
+virtual void rrend_set_grasped_nodes00(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
+public:
+virtual void async_get_grasped_nodes10(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
+virtual void async_set_grasped_nodes10(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
+
+protected:
+virtual void rrend_get_grasped_nodes10(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > ,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
+virtual void rrend_set_grasped_nodes10(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
+public:
+virtual void async_get_grasped_nodes01(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
+virtual void async_set_grasped_nodes01(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
+
+protected:
+virtual void rrend_get_grasped_nodes01(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > ,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
+virtual void rrend_set_grasped_nodes01(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
+public:
+virtual void async_get_grasped_nodes11(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
+virtual void async_set_grasped_nodes11(RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
+
+protected:
+virtual void rrend_get_grasped_nodes11(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > ,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
+virtual void rrend_set_grasped_nodes11(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
+public:
 virtual void async_getClothState(boost::function<void (RR_SHARED_PTR<ClothState >, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
 
 protected:
 virtual void rrend_getClothState(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<ClothState > ,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
 public:
-virtual void async_setGraspVelocities(RR_SHARED_PTR<Velocity > v00, RR_SHARED_PTR<Velocity > v10, RR_SHARED_PTR<Velocity > v01, RR_SHARED_PTR<Velocity > v11,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
+virtual void async_setGraspPoses(RR_SHARED_PTR<Pose > p00, RR_SHARED_PTR<Pose > p10, RR_SHARED_PTR<Pose > p01, RR_SHARED_PTR<Pose > p11,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
 
 protected:
-virtual void rrend_setGraspVelocities(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
+virtual void rrend_setGraspPoses(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
+public:
+virtual void async_getFaceStructure(boost::function<void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > >, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
+
+protected:
+virtual void rrend_getFaceStructure(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > ,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
 public:
 virtual std::string RRType();
 };
@@ -139,8 +251,13 @@ virtual RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator > get_
 virtual RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::async_ClothSimulator > get_asyncobj();
 
 protected:
+static void rr_get_grasped_nodes00(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
+static void rr_get_grasped_nodes10(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
+static void rr_get_grasped_nodes01(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
+static void rr_get_grasped_nodes11(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > value, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
 static void rr_getClothState(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<ClothState > ret, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
-static void rr_setGraspVelocities(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
+static void rr_setGraspPoses(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
+static void rr_getFaceStructure(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > ret, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
  public:
 protected:bool rr_InitPipeServersRun;
 bool rr_InitWireServersRun;

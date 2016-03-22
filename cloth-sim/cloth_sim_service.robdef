@@ -2,10 +2,9 @@ service edu.rpi.cats.utilities.clothsim
 
 option version 0.5
 
-struct Velocity
-    field double vx
-    field double vy
-    field double vz
+struct Pose
+    field double[9] R
+    field double[3] p
 end struct
 
 struct ClothState
@@ -23,8 +22,13 @@ struct ClothState
 end struct
 
 object ClothSimulator
+    property uint16[] grasped_nodes00
+    property uint16[] grasped_nodes10
+    property uint16[] grasped_nodes01
+    property uint16[] grasped_nodes11
     
     function ClothState getClothState()
-    function void setGraspVelocities(Velocity v00, Velocity v10, Velocity v01, Velocity v11)
+    function void setGraspPoses(Pose p00, Pose p10, Pose p01, Pose p11)
+    function uint16[] getFaceStructure()
     
 end object
