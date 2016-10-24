@@ -65,6 +65,9 @@ public:
 
 	virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > getFaceStructure();
 
+	virtual void setCameraPose(RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::Pose > pk);
+	virtual RR_SHARED_PTR<edu::rpi::cats::utilities::clothsim::DepthImage > getRenderedImage();
+
 private:
 	double *x, *y, *z;
 	double *fx, *fy, *fz;
@@ -75,6 +78,10 @@ private:
 	float dt;
 	bool new_grasp_positions, grasp_positions_updated;
 	std::vector<node_relationship> grasp00_nodes, grasp10_nodes, grasp01_nodes, grasp11_nodes;
+	float *image_data;
+	uint16_t image_height, image_width;
+	btMatrix3x3 ROk, K;
+	btVector3 pOk_O;
 	
 
 	boost::mutex mtx_;
@@ -94,4 +101,5 @@ private:
 	void updateGraspPoints(std::vector<node_relationship> grasp_nodes, btScalar time_step);
 	void resetGraspVelocities(std::vector<node_relationship> grasp_nodes);
 	void solveSpringForces(btScalar structural_stiffness, btScalar bending_stiffness);
+	void renderDepthImage();
 };

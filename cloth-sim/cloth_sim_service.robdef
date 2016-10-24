@@ -21,6 +21,12 @@ struct ClothState
     
 end struct
 
+struct DepthImage
+    field uint16 width
+    field uint16 height
+    field single[] data    
+end struct
+
 object ClothSimulator
     property uint16[] grasped_nodes00
     property uint16[] grasped_nodes10
@@ -30,5 +36,7 @@ object ClothSimulator
     function ClothState getClothState()
     function void setGraspPoses(Pose p00, Pose p10, Pose p01, Pose p11)
     function uint16[] getFaceStructure()
+    function void setCameraPose(Pose pk)
+    function DepthImage getRenderedImage()
     
 end object

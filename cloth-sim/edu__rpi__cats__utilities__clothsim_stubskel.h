@@ -44,6 +44,14 @@ virtual RR_SHARED_PTR<RobotRaconteur::MessageElementStructure> PackStructure(RR_
 virtual RR_SHARED_PTR<RobotRaconteur::RRStructure> UnpackStructure(RR_SHARED_PTR<RobotRaconteur::MessageElementStructure> m);
 };
 
+class DepthImage_stub : public virtual RobotRaconteur::StructureStub
+{
+public:
+DepthImage_stub(RR_SHARED_PTR<RobotRaconteur::RobotRaconteurNode> node) : RobotRaconteur::StructureStub(node) {}
+virtual RR_SHARED_PTR<RobotRaconteur::MessageElementStructure> PackStructure(RR_SHARED_PTR<RobotRaconteur::RRObject> s);
+virtual RR_SHARED_PTR<RobotRaconteur::RRStructure> UnpackStructure(RR_SHARED_PTR<RobotRaconteur::MessageElementStructure> m);
+};
+
 class async_ClothSimulator
 {
 public:
@@ -130,6 +138,24 @@ RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > async_getFaceStructure(boost:
 }
 #endif
 
+virtual void async_setCameraPose(RR_SHARED_PTR<Pose > pk,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
+
+#ifdef ROBOTRACONTEUR_USE_ASIO_SPAWN
+virtual void async_setCameraPose(RR_SHARED_PTR<Pose > pk,boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
+{
+    RobotRaconteur::detail::async_wrap_for_spawn_void(boost::bind((void (async_ClothSimulator::*)(RR_SHARED_PTR<Pose >,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>)>,int32_t))&async_ClothSimulator::async_setCameraPose, this, boost::ref(pk),_1,rr_timeout), rr_yield);
+}
+#endif
+
+virtual void async_getRenderedImage(boost::function<void (RR_SHARED_PTR<DepthImage >, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE) = 0;
+
+#ifdef ROBOTRACONTEUR_USE_ASIO_SPAWN
+RR_SHARED_PTR<DepthImage > async_getRenderedImage(boost::asio::yield_context rr_yield, int32_t rr_timeout=RR_TIMEOUT_INFINITE)
+{
+    return RobotRaconteur::detail::async_wrap_for_spawn<RR_SHARED_PTR<DepthImage >>(boost::bind((void (async_ClothSimulator::*)(boost::function<void (RR_SHARED_PTR<DepthImage >,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>)>,int32_t))&async_ClothSimulator::async_getRenderedImage, this, _1,rr_timeout), rr_yield);
+}
+#endif
+
 };
 class ClothSimulator_stub : public virtual ClothSimulator, public virtual async_ClothSimulator, public virtual RobotRaconteur::ServiceStub
 {
@@ -154,6 +180,10 @@ virtual RR_SHARED_PTR<ClothState > getClothState();
 virtual void setGraspPoses(RR_SHARED_PTR<Pose > p00, RR_SHARED_PTR<Pose > p10, RR_SHARED_PTR<Pose > p01, RR_SHARED_PTR<Pose > p11);
 
 virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > getFaceStructure();
+
+virtual void setCameraPose(RR_SHARED_PTR<Pose > pk);
+
+virtual RR_SHARED_PTR<DepthImage > getRenderedImage();
 
 
 virtual void DispatchEvent(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m);
@@ -204,6 +234,16 @@ virtual void async_getFaceStructure(boost::function<void (RR_SHARED_PTR<RobotRac
 
 protected:
 virtual void rrend_getFaceStructure(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > ,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
+public:
+virtual void async_setCameraPose(RR_SHARED_PTR<Pose > pk,boost::function<void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
+
+protected:
+virtual void rrend_setCameraPose(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
+public:
+virtual void async_getRenderedImage(boost::function<void (RR_SHARED_PTR<DepthImage >, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > rr_handler, int32_t rr_timeout=RR_TIMEOUT_INFINITE);
+
+protected:
+virtual void rrend_getRenderedImage(RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, boost::function< void (RR_SHARED_PTR<DepthImage > ,RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException>) > handler);
 public:
 virtual std::string RRType();
 };
@@ -258,6 +298,8 @@ static void rr_get_grasped_nodes11(RR_WEAK_PTR<edu::rpi::cats::utilities::cloths
 static void rr_getClothState(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<ClothState > ret, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
 static void rr_setGraspPoses(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
 static void rr_getFaceStructure(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > ret, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
+static void rr_setCameraPose(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
+static void rr_getRenderedImage(RR_WEAK_PTR<edu::rpi::cats::utilities::clothsim::ClothSimulator_skel> skel, RR_SHARED_PTR<DepthImage > ret, RR_SHARED_PTR<RobotRaconteur::RobotRaconteurException> err, RR_SHARED_PTR<RobotRaconteur::MessageEntry> m, RR_SHARED_PTR<RobotRaconteur::ServerEndpoint> ep);
  public:
 protected:bool rr_InitPipeServersRun;
 bool rr_InitWireServersRun;

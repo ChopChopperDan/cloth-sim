@@ -17,6 +17,7 @@ namespace clothsim
 
 class Pose;
 class ClothState;
+class DepthImage;
 class ClothSimulator;
 
 class Pose : public RobotRaconteur::RRStructure {
@@ -43,6 +44,15 @@ RR_SHARED_PTR<RobotRaconteur::RRArray<double > > fz;
 virtual std::string RRType() {return "edu.rpi.cats.utilities.clothsim.ClothState";  }
 };
 
+class DepthImage : public RobotRaconteur::RRStructure {
+public:
+uint16_t width;
+uint16_t height;
+RR_SHARED_PTR<RobotRaconteur::RRArray<float > > data;
+
+virtual std::string RRType() {return "edu.rpi.cats.utilities.clothsim.DepthImage";  }
+};
+
 class ClothSimulator : public virtual RobotRaconteur::RRObject
 {
 public:
@@ -63,6 +73,10 @@ virtual RR_SHARED_PTR<ClothState > getClothState()=0;
 virtual void setGraspPoses(RR_SHARED_PTR<Pose > p00, RR_SHARED_PTR<Pose > p10, RR_SHARED_PTR<Pose > p01, RR_SHARED_PTR<Pose > p11)=0;
 
 virtual RR_SHARED_PTR<RobotRaconteur::RRArray<uint16_t > > getFaceStructure()=0;
+
+virtual void setCameraPose(RR_SHARED_PTR<Pose > pk)=0;
+
+virtual RR_SHARED_PTR<DepthImage > getRenderedImage()=0;
 
 virtual std::string RRType() {return "edu.rpi.cats.utilities.clothsim.ClothSimulator";  }
 };

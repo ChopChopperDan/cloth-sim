@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 	RobotRaconteur::RobotRaconteurNode::s()->RegisterTransport(t);
 	
 	// Create the Kinect object (nx ny w h m k)
-	boost::shared_ptr<ClothSimImpl> k = boost::make_shared<ClothSimImpl>(31, 31, 0.6, 0.4, 0.5, 0.9f, 0.1f, 0.15f);
+	boost::shared_ptr<ClothSimImpl> k = boost::make_shared<ClothSimImpl>(31, 31, 0.6, 0.4, 0.5, 0.1f, 0.1f, 0.1f);
 
 	// Register the service type with Robot Raconteur
 	RobotRaconteur::RobotRaconteurNode::s()->RegisterServiceType(boost::make_shared<edu::rpi::cats::utilities::clothsim::edu__rpi__cats__utilities__clothsimFactory>());
